@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wind-cast"
+version = "1.0.0"
+description = "Day-ahead energy forecasts for the Sotavento wind farm from weather predictions"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Cristian Gil Sanz" }, { name = "Paola Herráez Bravo" }]
+requires-python = ">=3.10"
+dependencies = ["scikit-learn>=1.5", "pandas>=2.2", "matplotlib>=3.8", "joblib>=1.4"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3", "ruff>=0.8"]
+
+[project.scripts]
+wind-cast = "windcast.cli:entry"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+windcast = ["data/*.csv.gz"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM", "RUF"]
+ignore = ["RUF001"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
